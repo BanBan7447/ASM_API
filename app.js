@@ -18,7 +18,16 @@ require('./model/type_product');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+// router ASM
+var customerRouter = require('./routes/router_customers');
+
+
 var app = express();
+
+// Cấu hình swagger
+const swaggerUI = require('swagger-ui-express');
+const swaggerDoc = require('./configSwagger');
+app.use('/api-ASM', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,6 +46,9 @@ mongoose.connect('mongodb+srv://BanBan:BanBan4774@cluster0.vccez.mongodb.net/Dat
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// use router ASM
+app.use('/customer', customerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
