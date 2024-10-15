@@ -4,9 +4,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// connect model to database mongoDB
+const mongoose = require('mongoose');
+require('./model/customer');
+require('./model/detail_order');
+require('./model/order');
+require('./model/payment');
+require('./model/product_size');
+require('./model/product');
+require('./model/size');
+require('./model/type_product');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const { default: mongoose } = require('mongoose');
 
 var app = express();
 
