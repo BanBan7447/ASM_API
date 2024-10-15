@@ -6,6 +6,26 @@ var JWT = require('jsonwebtoken');
 const configENV = require('../configENV');
 
 // router thêm loại sản phẩm
+/**
+ * @swagger
+ * /type_product/addTypeProduct:
+ *   post:
+ *      summary: 'Thêm loại sản phẩm'
+ *      parameters:
+ *       - in: query
+ *         name: name
+ *         description: name loại sản phẩm
+ *         required: true
+ *         type: string
+ *      security:
+ *          - bearerAuth: []
+ *      responses:
+ *        200:
+ *          description: 'Thêm sản phẩm thành công'
+ *        400:
+ *          description: 'Thêm sản phẩm thất bại'
+ */
+
 router.post('/addTypeProduct', async (req, res) => {
     try {
         // Kiểm tra token
@@ -30,6 +50,20 @@ router.post('/addTypeProduct', async (req, res) => {
 });
 
 // router lấy toàn bộ danh sách loại sản phẩm
+/**
+ * @swagger
+ * /type_product/getAllType:
+ *   get:
+ *      summary: 'Lấy toàn bộ danh sách loại sản phẩm'
+ *      security:
+ *          - bearerAuth: []
+ *      responses:
+ *        200:
+ *          description: 'Lấy thành công'
+ *        400:
+ *          description: 'Lấy thất bại'
+ */
+
 router.get('/getAllType', async (req, res) => {
     try{
         // Lấy token
@@ -55,6 +89,26 @@ router.get('/getAllType', async (req, res) => {
 });
 
 // router xóa loại sản phẩm
+/**
+ * @swagger
+ * /type_product/deleteType/{id}:
+ *   delete:
+ *      summary: 'Lấy toàn bộ danh sách loại sản phẩm'
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          description: id loại sản phẩm
+ *          required: true
+ *          type: string
+ *      security:
+ *          - bearerAuth: []
+ *      responses:
+ *        200:
+ *          description: 'Lấy thành công'
+ *        400:
+ *          description: 'Lấy thất bại'
+ */
+
 router.delete('/deleteType/:id', async (req, res) => {
     try{
         const token = req.header('Authorization').split(' ')[1];
@@ -65,7 +119,7 @@ router.delete('/deleteType/:id', async (req, res) => {
                 }else{
                     const {id} = req.params;
                     await typeProduct.findByIdAndDelete(id);
-                    res.status(200).json({status: false, message: "Xóa thành công"})
+                    res.status(200).json({status: true, message: "Xóa thành công"})
                 }
             });
         }else{
@@ -77,6 +131,31 @@ router.delete('/deleteType/:id', async (req, res) => {
 })
 
 // router sửa loại sản phẩm
+/**
+ * @swagger
+ * /type_product/editType:
+ *   put:
+ *      summary: 'Sửa loại sản phẩm'
+ *      parameters:
+ *        - in: query
+ *          name: id
+ *          description: id loại sản phẩm
+ *          required: true
+ *          type: string
+ *        - in: query
+ *          name: name
+ *          description: name loại sản phẩm
+ *          required: true
+ *          type: string
+ *      security:
+ *          - bearerAuth: []
+ *      responses:
+ *        200:
+ *          description: 'Thêm sản phẩm thành công'
+ *        400:
+ *          description: 'Thêm sản phẩm thất bại'
+ */
+
 router.put('/editType', async (req, res) => {
     try{
         // Lấy token

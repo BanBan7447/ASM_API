@@ -1,12 +1,25 @@
-const express = require('express');
-const router = express.Router();
-const productModel = require('../model/product');
-
-var JWT = require('jsonwebtoken');
-const configENV = require('../configENV');
-const { model } = require('mongoose');
+var express = require('express');
+var router = express.Router();
+var productModel = require('../model/product');
 
 // router thêm sản phẩm
+/**
+ * @swagger
+ * /product/addProduct:
+ *   post:
+ *      summary: 'Thêm sản phẩm'
+ *      requestBody:
+ *          required: true,
+ *          content:
+ *              application/json:
+ *                  type: string
+ *      responses:
+ *        200:
+ *          description: 'Thêm sản phẩm thành công'
+ *        400:
+ *          description: 'Thêm sản phẩm thất bại'
+ */
+
 router.post('/addProduct', async (req, res) => {
     try {
         const { Type, Image, Name, BasePrice, Origin, Desription, Rating } = req.body;
@@ -19,6 +32,24 @@ router.post('/addProduct', async (req, res) => {
 });
 
 // router lấy sản phẩm theo loại
+/**
+ * @swagger
+ * /product/getProductsByType:
+ *   get:
+ *      summary: 'Lấy sản phẩm theo loại'
+ *      parameters:
+ *        - in: query
+ *          name: TypeId
+ *          description: id loại sản phẩm
+ *          required: true
+ *          type: string
+ *      responses:
+ *        200:
+ *          description: 'Lấy thành công'
+ *        400:
+ *          description: 'Lấy thất bại'
+ */
+
 router.get('/getProductsByType', async (req, res) => {
     try {
         const { TypeId } = req.query;
@@ -30,6 +61,23 @@ router.get('/getProductsByType', async (req, res) => {
 });
 
 // router tìm sản phẩm có giá cao nhất theo loại
+/**
+ * @swagger
+ * /product/getProductMostPrice:
+ *   get:
+ *      summary: 'Lấy sản phẩm theo loại'
+ *      parameters:
+ *        - in: query
+ *          name: TypeId
+ *          description: id loại sản phẩm
+ *          required: true
+ *          type: string
+ *      responses:
+ *        200:
+ *          description: 'Lấy thành công'
+ *        400:
+ *          description: 'Lấy thất bại'
+ */
 router.get('/getProductMostPrice', async (req, res) => {
     try {
         const { TypeId } = req.query;

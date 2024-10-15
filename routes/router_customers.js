@@ -106,8 +106,6 @@ router.post('/loginCustomer', async function (req, res) {
  * /customer/getCustomer:
  *   get:
  *     summary: 'Lấy thông tin chi tiết người dùng'
- *     tags:
- *       - hhhhhh
  *     parameters:
  *       - in: query
  *         name: id
@@ -146,4 +144,4 @@ router.get('/getCustomer', async (req, res) => {
     }
 })
 
-module.exports = router
+module.exports = router;
