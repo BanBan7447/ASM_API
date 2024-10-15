@@ -20,7 +20,8 @@ var usersRouter = require('./routes/users');
 
 // router ASM
 var customerRouter = require('./routes/router_customers');
-
+var typeProductRouter = require('./routes/router_typeProducts');
+var productRouter = require('./routes/router_products');
 
 var app = express();
 
@@ -49,6 +50,8 @@ app.use('/users', usersRouter);
 
 // use router ASM
 app.use('/customer', customerRouter);
+app.use('/type_product', typeProductRouter);
+app.use('/product', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

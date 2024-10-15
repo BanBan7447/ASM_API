@@ -4,7 +4,7 @@ const ObjectID = Schema.ObjectId;
 
 const product = new Schema({
     id: {type: ObjectID},
-    type:{
+    Type:{
         type: ObjectID,
         ref: 'type_products'
     },
